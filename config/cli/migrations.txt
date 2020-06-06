@@ -1,0 +1,11 @@
+'use strict'
+module.exports = {
+	up: (queryInterface, Sequelize) => {
+		return queryInterface.createTable('#3',
+		#4
+		)
+	},
+	down: queryInterface => {
+		return queryInterface.dropTable('#3')
+	}
+}

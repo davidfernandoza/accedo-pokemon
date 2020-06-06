@@ -1,0 +1,12 @@
+'use strict'
+const { join } = require('path')
+const Dto = require(join(__dirname, './dto'))
+
+class #2Dto extends Dto {
+	constructor() {
+		const schema = #4
+		super(schema)
+	}
+}
+
+module.exports = #2Dto

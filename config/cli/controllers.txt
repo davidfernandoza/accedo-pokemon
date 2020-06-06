@@ -1,0 +1,12 @@
+'use strict'
+const { join } = require('path')
+const Controller = require(join(__dirname, './controller'))
+
+class #1 extends Controller {
+	constructor({ #2Repository, #2Dto, Config, StringHelper, DoneString }) {
+		super(#2Repository, #2Dto, Config, StringHelper, DoneString)
+	}
+	// Logica diferente al CRUD base aqui:
+}
+
+module.exports = #1

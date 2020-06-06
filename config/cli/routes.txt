@@ -1,0 +1,103 @@
+'use strict'
+const { Router } = require('express')
+
+/*
+ * Rutas de los #2:
+ */
+
+module.exports = ({
+	#2Controller,
+	#2Request,
+	AuthMiddleware,
+	AdminPolitic,
+	DevPolitic	
+}) => {
+	const router = Router()
+
+	/*
+	 * Request:
+	 */
+	const reqBody = #2Request.body.bind(#2Request)
+	const reqPublic = #2Request.public.bind(#2Request)
+	const reqPrivate = #2Request.private.bind(#2Request)
+
+	/*
+	 * Politics:
+	 */
+	const politics = [
+		AdminPolitic.validate.bind(AdminPolitic),
+		DevPolitic.validate.bind(DevPolitic)
+	]
+
+	/*
+	 * Middlewares:
+	 */
+	const auth = AuthMiddleware.compare.bind(AuthMiddleware)
+
+
+	/*
+	 * Controller:
+	 */
+	const controller = #2Controller
+	
+	/*
+	 * -----------------------------------------------------------------------------------*
+	 * GET:
+	 */
+	router.get(
+		'/',
+		reqPublic,
+		auth,
+		politics,
+		controller.getAll.bind(controller)
+	)
+
+	router.get(
+		'/:id',
+		reqPrivate,
+		auth,
+		politics,
+		controller.get.bind(controller)
+	)
+
+	/*
+	 * -----------------------------------------------------------------------------------*
+	 * POST:
+	 */
+	router.post(
+		'/',
+		reqPrivate,
+		auth,
+		politics,
+		reqBody,
+		controller.create.bind(controller)
+	)
+
+	/*
+	 * -----------------------------------------------------------------------------------*
+	 * PUT:
+	 */
+	router.put(
+		'/:id',
+		reqPrivate,
+		auth,
+		politics,
+		reqBody,
+		controller.update.bind(controller)
+	)
+
+
+	/*
+	 * -----------------------------------------------------------------------------------*
+	 * DELETE:
+	 */
+	router.delete(
+		'/:id',
+		reqPrivate,
+		auth,
+		politics,
+		controller.delete.bind(controller)
+	)
+
+	return router
+}

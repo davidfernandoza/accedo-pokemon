@@ -1,0 +1,12 @@
+'use strict'
+const { join } = require('path')
+const Repository = require(join(__dirname, './repository'))
+
+class #2Repository extends Repository {
+	constructor({ DB, #2Dto, Config }) {
+		super(DB, #2Dto, Config, '#3')
+		this.db = DB
+	}
+	// Aqui van las consultas especializadas
+}
+module.exports = #2Repository

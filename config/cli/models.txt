@@ -1,0 +1,64 @@
+'use strict'
+module.exports = (sequelize, DataTypes) => {
+	const #3 = sequelize.define(
+		'#3',
+			#4
+		,{
+			timestamps: true,
+			tableName: '#3',
+			createdAt: 'created_at',
+			updatedAt: 'updated_at'
+		}
+	)
+
+	#3.associate = function (models) {
+		/*
+		 * Un #3 se registra en muchos #5 (1:M)
+		 */
+		models.#3.hasMany(models.#5, {
+			foreignKey: '#3_id', // a donde va
+			sourceKey: 'id', // de donde se obtiene
+			as: '#5'
+		})
+
+		// Un #3 tiene un #5 (1:1)
+		models.#3.belongsTo(models.#5, {
+			foreignKey: '#5_id', // a donde llega
+			targetKey: 'id', // de donde viene
+			as: '#5'
+		})
+
+		// Un #3 tiene muchas #5 (1:M)
+		models.#3.belongsToMany(models.#5, {
+			through: models.#3_#5, // Tabla pivote
+			foreignKey: '#3_id', // a donde va
+			sourceKey: 'id', // de donde se obtiene
+			as: '#5'
+		})
+
+		// Un #3 le pertenece a un #5 (1:1)
+		models.#3.hasOne(models.#5, {
+			foreignKey: '#3_id', // a donde va
+			sourceKey: 'id', // de donde se obtiene
+			as: '#5'
+		})
+	}
+
+	return #3
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
