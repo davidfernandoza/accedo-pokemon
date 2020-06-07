@@ -10,12 +10,13 @@ class JWTService {
 	}
 
 	//  Metodo para crear el token
-	async create(id, rol, organization, secureToken) {
+	async create(id, secureToken) {
 		let payload
-
 		if (!id) return { status: 403, payload: null }
-		// Para la seguridad de WebHooks o de recuperacion de contraseñas
 		else if (secureToken) {
+			/*
+			 * Para la seguridad de WebHooks o de recuperacion de contraseñas
+			 */
 			payload = {
 				sub: id,
 				token: secureToken,
@@ -27,11 +28,8 @@ class JWTService {
 		}
 		// seguridad de usuario
 		else {
-			if (!rol) return { status: 403, payload: null }
 			payload = {
 				sub: id,
-				rol: rol,
-				organization: organization,
 				iat: moment().unix(),
 				exp: moment().add(7, 'days').unix()
 			}
@@ -59,9 +57,7 @@ class JWTService {
 			let data = {}
 			if (type == 'auth') {
 				data = {
-					id: payload.sub,
-					rol: payload.rol,
-					organization: payload.organization
+					id: payload.sub
 				}
 			} else {
 				data = {

@@ -23,9 +23,9 @@ class TokenAuth extends Controller {
 	// Nuevo token ---------------------------------------------------------------+
 
 	async create(req, res) {
-		const { id, rol, organization } = req
+		const { id } = req
 		const { http_auth_token } = req.headers
-		const newToken = await this.JWTServices.create(id, rol, organization)
+		const newToken = await this.JWTServices.create(id)
 		if (newToken.status === 200) {
 			if (await this.addBlackList(http_auth_token)) {
 				return await super.response(res, newToken.payload, 'DON200')

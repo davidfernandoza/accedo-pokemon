@@ -4,7 +4,7 @@ const Auth = require(join(__dirname, './auth'))
 
 class UsersAuth extends Auth {
 	constructor({
-		UsersController,
+		UsersRepository,
 		UsersDto,
 		JWTService,
 		DoneString,
@@ -14,7 +14,7 @@ class UsersAuth extends Auth {
 			attribute: 'email' //username -> con este atributo busca en base de datos
 		}
 		super(
-			UsersController,
+			UsersRepository,
 			EncryptionHelper,
 			UsersDto,
 			JWTService,

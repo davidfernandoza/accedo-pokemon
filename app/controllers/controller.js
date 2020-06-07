@@ -163,16 +163,12 @@ class Controller {
 			return res
 				.status(this.#doneString.DON404.status)
 				.send(this.#doneString.DON404)
-		}
+		} else if (
 
-		// Respuesta WEB
-		if (code == 'OK') {
-			entity.app = this.app
-			return res.render(entity.page, entity)
-		}
-
-		// Atributo OK
-		else if (
+		/*
+		 * Los codigos con L son de listas y el mapeo se debe hacer de forma iterada
+		 * Los cogigos si L son objetos que se mapean directamente
+		 */
 			code == 'DON200' ||
 			code == 'DON201' ||
 			code == 'DON200L' ||

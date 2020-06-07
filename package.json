@@ -1,23 +1,20 @@
 {
-  "name": "psp-sena",
-  "version": "0.1.0",
-  "description": "Backend NODE.JS para el aplicativo de PSP(Personal Software Process) del SENA, en el programa de Tecnológo ADSI",
+  "name": "accedo-pokemon",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon -e js,handlebars ./index.js",
-    "db-refresh-p": "npx sequelize-cli db:seed:undo:all && npx sequelize-cli db:migrate:undo:all && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
-    "db-init": "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
-    "db-init-hard": "npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
-    "db-refresh": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
-    "db-refresh-hard": "sequelize db:drop && sequelize db:create && sequelize db:migrate && sequelize db:seed:all"
+    "db-refresh-p": "npx sequelize-cli db:migrate:undo:all && npx sequelize-cli db:migrate",
+    "db-init": "npx sequelize-cli db:migrate",
+    "db-init-hard": "npx sequelize-cli db:create && npx sequelize-cli db:migrate",
+    "db-refresh": "sequelize db:migrate:undo:all && sequelize db:migrate",
+    "db-refresh-hard": "sequelize db:drop && sequelize db:create && sequelize db:migrate"
   },
   "author": "David Fernando Torres Zapata (@davidfernandoza)",
   "license": "MIT",
   "dependencies": {
     "@hapi/joi": "^17.1.1",
     "awilix": "^4.2.3",
-    "axios": "^0.19.2",
     "bcrypt": "^4.0.1",
     "body-parse": "^0.1.0",
     "compression": "^1.7.4",
@@ -35,8 +32,7 @@
     "nodemailer": "^6.4.6",
     "nodemailer-express-handlebars": "^4.0.0",
     "pg": "^7.18.1",
-    "sequelize": "^5.21.3",
-    "twilio": "^3.43.0"
+    "sequelize": "^5.21.3"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",

@@ -4,46 +4,27 @@ const Controller = require(join(__dirname, './controller'))
 
 class UsersController extends Controller {
 	#data = {}
-	constructor({ UsersRepository, UsersDto, Config, DoneString }) {
+	#usersAuth = {}
+
+	constructor({ UsersRepository, UsersDto, Config, DoneString, UsersAuth }) {
 		super(UsersRepository, UsersDto, Config, DoneString)
+		this.#usersAuth = UsersAuth
 	}
 
 	// --------------------------------------------------------------------------
 	async create(req, res) {
-		req.body.organizations_id = req.organization
-		return super.create(req, res)
-	}
-
-	// --------------------------------------------------------------------------
-	async update(req, res) {
-		req.body.organizations_id =
-			!req.body.organizations_id || req.body.organizations_id == ''
-				? null
-				: req.body.organizations_id
-		delete req.body.password
-		return super.update(req, res)
-	}
-
-	// --------------------------------------------------------------------------
-	async getAllByOrganization(req, res) {
-		await super.getByAttribute({
-			attribute: 'organizations_id',
-			value: req.route.path == '/free' ? null : req.organization,
-			type: 'all',
-			res: res
+		let user = {},
+			password = req.body.password
+		req.return = true
+		user = await super.create(req, res)
+		user.token = await this.#usersAuth.login({
+			body: {
+				identity: user.email,
+				password: password
+			},
+			return: true
 		})
-	}
-
-	// --------------------------------------------------------------------------
-	async getAllByProject(req, res) {
-		this.#data = await this.entityRepository.getByInclude({
-			includeEntity: 'projects',
-			includeAlias: 'projects',
-			includeRequired: true,
-			includeWhere: { id: req.params.id },
-			type: 'all'
-		})
-		return await this.response(res, this.#data, 'DON200L')
+		return await this.response(res, user, 'DON201')
 	}
 
 	// --------------------------------------------------------------------------
