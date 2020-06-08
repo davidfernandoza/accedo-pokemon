@@ -6,7 +6,7 @@ class ErrorString {
 			status: 400,
 			name: 'Bad Request',
 			code: 'ERR400',
-			message: 'Request created incorrectly'
+			message: 'Request incorrectly'
 		}
 
 		this.ERR401 = {
