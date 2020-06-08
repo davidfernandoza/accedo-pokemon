@@ -30,7 +30,7 @@ module.exports = ({ UsersController, AuthMiddleware, UsersRequest }) => {
 	 * -----------------------------------------------------------------------------------*
 	 * GET:
 	 */
-	router.get('/:id', reqPrivate, auth, controller.get.bind(controller))
+	router.get('/', reqPrivate, auth, controller.get.bind(controller))
 
 	/*
 	 * -----------------------------------------------------------------------------------*

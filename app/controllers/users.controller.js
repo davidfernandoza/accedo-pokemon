@@ -28,6 +28,13 @@ class UsersController extends Controller {
 	}
 
 	// --------------------------------------------------------------------------
+	async get(req, res) {
+		req.params.id = req.id
+		
+		return await super.get(req, res)
+	}
+
+	// --------------------------------------------------------------------------
 	async changePassword(req, res) {
 		this.#data = await this.entityRepository.changePassword(
 			req.id,
