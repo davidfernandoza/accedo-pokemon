@@ -74,7 +74,7 @@ const { TokenBlackListDto, UsersDto } = require(join(__dirname, '../dto'))
 /* -----------------------------------------------------*/
 /* Services: 																						*/
 /*------------------------------------------------------*/
-const { JWTService, MailService } = require(join(__dirname, './services'))
+const { JWTService } = require(join(__dirname, './services'))
 
 /* -----------------------------------------------------*/
 /* Strings: 																						*/
@@ -131,7 +131,6 @@ container
 	 * Services:
 	 */
 	.register({
-		MailService: asClass(MailService).singleton(),
 		JWTService: asClass(JWTService).singleton()
 	})
 
